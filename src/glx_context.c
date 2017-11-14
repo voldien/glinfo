@@ -5,6 +5,9 @@
 #include<unistd.h>
 #include<GL/glx.h>
 
+/**
+ *	Global variables.
+ */
 Display* display = NULL;
 GLXContext glc_context = NULL;
 Window glc_window = NULL;
@@ -17,6 +20,7 @@ int giCreateMakeGLContext(void){
 	GLint nelements;
 	int maj, min;
 	XVisualInfo* vi;
+	Colormap cmap;
 	int screen;
 	Window root;
 	int winmask = CWBackPixmap| CWColormap | CWBorderPixel| CWEventMask;
@@ -36,11 +40,6 @@ int giCreateMakeGLContext(void){
 	screen = DefaultScreen(display);
 	root = RootWindow(display, screen);
 
-	winAttribs.event_mask = 0;
-	winAttribs.border_pixmap = None;
-	winAttribs.border_pixel = 0;
-	winAttribs.bit_gravity = ForgetGravity;
-
 	config = glXGetFBConfigs(display, screen, &nelements);
 
 	/*	TODO improve to something that works for all drivers.	*/
@@ -55,9 +54,17 @@ int giCreateMakeGLContext(void){
 	}
 
 	/*	*/
+	cmap = XCreateColormap(display, root, vi->visual, AllocNone);
+
+	winAttribs.colormap = cmap;
+	winAttribs.event_mask = 0;
+	winAttribs.border_pixmap = None;
+	winAttribs.border_pixel = 0;
+	winAttribs.bit_gravity = ForgetGravity;
+
+	/*	*/
 	glc_window = XCreateWindow(display, root, 0, 0, 1, 1, 0, vi->depth,
 	InputOutput, vi->visual, winmask, &winAttribs);
-
 
 	if(min >= 3){
 		glc_context = glXCreateNewContext(display, config[i], GLX_RGBA_TYPE, 0, 1);
