@@ -39,19 +39,19 @@ extern void giDeleteGLContext(void);
 GLenum err;
 
 GLint Integervtmp;
-#define GLIF_CONSTANTI_PRINT(glenum)						\
+#define GLIF_CONSTANTI_PRINT(glenum)				\
 		glGetIntegerv(glenum, &Integervtmp);		\
 		printf(#glenum " : %d\n", Integervtmp);		\
-		err = glGetError();							\
+		err = glGetError();				\
 
 GLint64 Integervtmp64;
-#define GLIF_CONSTANTI64_PRINT(glenum)					\
+#define GLIF_CONSTANTI64_PRINT(glenum)				\
 		glGetInteger64v(glenum, &Integervtmp64);	\
 		printf(#glenum " : %ld\n", Integervtmp64);	\
 
 
 GLfloat glGetFloatvtmp;
-#define GLIF_CONSTANTF_PRINT(glenum)						\
+#define GLIF_CONSTANTF_PRINT(glenum)				\
 		glGetFloatv(glenum, &glGetFloatvtmp);		\
 		printf(#glenum " : %f\n", glGetFloatvtmp);	\
 
