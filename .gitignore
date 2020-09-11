@@ -64,3 +64,4 @@ CTestTestfile.cmake
 
 # temp files.
 *~
+build/

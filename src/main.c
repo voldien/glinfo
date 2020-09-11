@@ -64,7 +64,6 @@ int main( int argc, char** argv){
 		return EXIT_FAILURE;
 	}
 
-
 	/*	Display information.	*/
 	printf("RENDERER %s\n", glGetString(GL_RENDERER));
 	printf("VENDOR %s\n", glGetString(GL_VENDOR));
@@ -72,6 +71,7 @@ int main( int argc, char** argv){
 	printf("SHADING_LANGUAGE_VERSION %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 	printf("\n");
 
+	/*	*/
 	GLIF_CONSTANTI_PRINT(GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS);
 	GLIF_CONSTANTI_PRINT(GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS);
 	GLIF_CONSTANTI_PRINT(GL_MAX_COMPUTE_UNIFORM_BLOCKS);
