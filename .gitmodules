@@ -1,0 +1,3 @@
+[submodule "extern/fragcore"]
+	path = extern/fragcore
+	url = https://github.com/voldien/fragcore.git
