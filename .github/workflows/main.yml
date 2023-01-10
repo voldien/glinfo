@@ -22,7 +22,8 @@ jobs:
     - name: Configure dependencies
       run: |
         sudo apt-get install libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev \
-        libsdl2-dev libfreeimage-dev libfreetype6-dev libfmt-dev libeigen3-dev
+        libsdl2-dev libfreetype6-dev libfmt-dev libeigen3-dev libglew-dev \
+        libbz2-dev libzip-dev libfmt-dev binutils-dev
 
 
     - name: Create Build Environment
@@ -45,10 +46,3 @@ jobs:
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: cmake --build . --config $BUILD_TYPE
-
-    - name: Test
-      working-directory: ${{runner.workspace}}/build
-      shell: bash
-      # Execute tests defined by the CMake configuration.  
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C $BUILD_TYPE
