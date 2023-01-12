@@ -2,7 +2,6 @@
 [![Actions Build Status](https://github.com/voldien/glinfo/workflows/glinfo/badge.svg?branch=master)](https://github.com/voldien/glinfo/actions)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub release](https://img.shields.io/github/release/voldien/glinfo.svg)](https://github.com/voldien/glinfo/releases)
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/voldien/glinfo.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/voldien/glinfo/context:cpp)
 
 The *glinfo* is a program for displaying OpenGL capabilities information of the current system. 
 The program was influenced by both the *clinfo* and *vulkaninfo* program.

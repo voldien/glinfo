@@ -53,18 +53,28 @@ GLfloat glGetFloatvtmp;
 	glGetFloatv(glenum, &glGetFloatvtmp);                                                                              \
 	printf(#glenum " : %f\n", glGetFloatvtmp);
 
-// TODO add GetInternalformativ
+typedef struct capability_entry_t {
+	GLenum capability;
+	size_t nrValues;
+} CapabilityEntry;
 
 // TODO add support for multie dim
 typedef struct extension_entry_t {
-	std::string name;					 /*	*/
-	std::map<std::string, GLenum> Int32; /*	*/
-	std::map<std::string, GLenum> Int64; /*	*/
-	std::map<std::string, GLenum> Float; /*	*/
+	std::string name;							  /*	*/
+	std::map<std::string, CapabilityEntry> Int32; /*	*/
+	std::map<std::string, CapabilityEntry> Int64; /*	*/
+	std::map<std::string, CapabilityEntry> Float; /*	*/
 } ExtensionEntry;
 
+#define GLIF_MACRON(glenum, x)                                                                                         \
+	{                                                                                                                  \
+#glenum, { glenum, x }                                                                                         \
+	}
+
 #define GLIF_MACRO(glenum)                                                                                             \
-	{ #glenum, glenum }
+	{                                                                                                                  \
+#glenum, { glenum, 1 }                                                                                         \
+	}
 
 std::vector<ExtensionEntry> extensionList = {
 	{"GL_VERSION_1_1",
@@ -182,13 +192,14 @@ std::vector<ExtensionEntry> extensionList = {
 	  GLIF_MACRO(GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS), GLIF_MACRO(GL_MAX_COMPUTE_ATOMIC_COUNTERS),
 	  GLIF_MACRO(GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS), GLIF_MACRO(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS),
 	  GLIF_MACRO(GL_MAX_COMPUTE_UNIFORM_BLOCKS), GLIF_MACRO(GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS),
-	  GLIF_MACRO(GL_MAX_COMPUTE_IMAGE_UNIFORMS), GLIF_MACRO(GL_MAX_COMPUTE_WORK_GROUP_COUNT),
-	  GLIF_MACRO(GL_MAX_COMPUTE_WORK_GROUP_SIZE)},
+	  GLIF_MACRO(GL_MAX_COMPUTE_IMAGE_UNIFORMS), GLIF_MACRON(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 3),
+	  GLIF_MACRON(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 3)},
 	 {},
 	 {}},
 	{"GL_ARB_compute_variable_group_size",
-	 {GLIF_MACRO(GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB), GLIF_MACRO(GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB),
-	  GLIF_MACRO(GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB), GLIF_MACRO(GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB)},
+	 {GLIF_MACRO(GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB), GLIF_MACRON(GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB, 3),
+	  GLIF_MACRO(GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB),
+	  GLIF_MACRON(GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB, 3)},
 	 {},
 	 {}},
 	{"GL_ARB_cull_distance",
@@ -222,16 +233,6 @@ std::vector<ExtensionEntry> extensionList = {
 	{"GL_ARB_gpu_shader5",
 	 {GLIF_MACRO(GL_MAX_GEOMETRY_SHADER_INVOCATIONS), GLIF_MACRO(GL_MAX_FRAGMENT_INTERPOLATION_OFFSET),
 	  GLIF_MACRO(GL_MAX_VERTEX_STREAMS)},
-	 {},
-	 {}},
-	{"GL_ARB_imaging",
-	 {GLIF_MACRO(GL_MAX_CONVOLUTION_WIDTH), GLIF_MACRO(GL_MAX_CONVOLUTION_HEIGHT),
-	  GLIF_MACRO(GL_MAX_COLOR_MATRIX_STACK_DEPTH)},
-	 {},
-	 {}},
-	{"GL_ARB_internalformat_query2",
-	 {GLIF_MACRO(GL_MAX_WIDTH), GLIF_MACRO(GL_MAX_HEIGHT), GLIF_MACRO(GL_MAX_DEPTH), GLIF_MACRO(GL_MAX_LAYERS),
-	  GLIF_MACRO(GL_MAX_COMBINED_DIMENSIONS)},
 	 {},
 	 {}},
 	{"GL_ARB_matrix_palette",
@@ -321,19 +322,6 @@ std::vector<ExtensionEntry> extensionList = {
 		 GLIF_MACRO(GL_MAX_PROGRAM_MATRIX_STACK_DEPTH_ARB),
 		 GLIF_MACRO(GL_MAX_PROGRAM_MATRICES_ARB),
 		 GLIF_MACRO(GL_MAX_VERTEX_ATTRIBS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_INSTRUCTIONS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_NATIVE_INSTRUCTIONS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_TEMPORARIES_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_NATIVE_TEMPORARIES_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_PARAMETERS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_NATIVE_PARAMETERS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_ATTRIBS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_NATIVE_ATTRIBS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_ADDRESS_REGISTERS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_NATIVE_ADDRESS_REGISTERS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_LOCAL_PARAMETERS_ARB),
-		 GLIF_MACRO(GL_MAX_PROGRAM_ENV_PARAMETERS_ARB),
-
 	 },
 	 {},
 	 {}},
@@ -386,24 +374,10 @@ std::vector<ExtensionEntry> extensionList = {
 	 },
 	 {},
 	 {}},
-	{"GL_NV_fragment_program2",
-	 {
-		 GLIF_MACRO(GL_MAX_PROGRAM_EXEC_INSTRUCTIONS_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_CALL_DEPTH_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_IF_DEPTH_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_LOOP_DEPTH_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_LOOP_COUNT_NV),
-	 },
-	 {},
-	 {}},
 	{"GL_NV_gpu_program4",
 	 {
 		 GLIF_MACRO(GL_MIN_PROGRAM_TEXEL_OFFSET_NV),
 		 GLIF_MACRO(GL_MAX_PROGRAM_TEXEL_OFFSET_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_ATTRIB_COMPONENTS_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_RESULT_COMPONENTS_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_GENERIC_ATTRIBS_NV),
-		 GLIF_MACRO(GL_MAX_PROGRAM_GENERIC_RESULTS_NV),
 	 },
 	 {},
 	 {}},
@@ -479,22 +453,38 @@ int main(int argc, char **argv) {
 
 				for (auto it = extension.Int32.cbegin(); it != extension.Int32.cend(); it++) {
 					const std::string &attributeName = (*it).first;
-					GLenum enumV = (*it).second;
+					const size_t nrParams = (*it).second.nrValues;
+					GLenum enumV = (*it).second.capability;
 					GLint Integervtmp;
-					glGetIntegerv(enumV, &Integervtmp);
-					std::cout << "\t" << attributeName << " : " << Integervtmp << std::endl;
+
+					/*	*/
+					std::cout << "\t" << attributeName << " : ";
+
+					if (nrParams > 1) {
+						for (size_t i = 0; i < nrParams; i++) {
+							glGetIntegeri_v(enumV, i, &Integervtmp);
+							std::cout << Integervtmp;
+							if (i < nrParams - 1) {
+								std::cout << ",";
+							}
+						}
+						std::cout << std::endl;
+					} else {
+						glGetIntegerv(enumV, &Integervtmp);
+						std::cout << Integervtmp << std::endl;
+					}
 				}
 
 				for (auto it = extension.Int64.cbegin(); it != extension.Int64.cend(); it++) {
 					const std::string &attributeName = (*it).first;
-					GLenum enumV = (*it).second;
+					GLenum enumV = (*it).second.capability;
 					GLint64 Integervtmp;
 					glGetInteger64v(enumV, &Integervtmp);
 					std::cout << "\t" << attributeName << " : " << Integervtmp << std::endl;
 				}
 				for (auto it = extension.Float.cbegin(); it != extension.Float.cend(); it++) {
 					const std::string &attributeName = (*it).first;
-					GLenum enumV = (*it).second;
+					GLenum enumV = (*it).second.capability;
 					GLfloat Integervtmp;
 					glGetFloatv(enumV, &Integervtmp);
 					std::cout << "\t" << attributeName << " : " << Integervtmp << std::endl;
@@ -505,7 +495,14 @@ int main(int argc, char **argv) {
 			}
 		}
 
-		return EXIT_SUCCESS;
+		GLint nrExtensions;
+		glGetIntegerv(GL_NUM_EXTENSIONS, &nrExtensions);
+
+		std::cout << std::endl << "Device Extensions: " << nrExtensions << std::endl;
+		for (GLint i = 0; i < nrExtensions; i++) {
+
+			std::cout << "\t" << glGetStringi(GL_EXTENSIONS, i) << std::endl;
+		}
 
 	} catch (const std::exception &ex) {
 		std::cerr << cxxexcept::getStackMessage(ex) << std::endl;
