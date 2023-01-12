@@ -6,8 +6,6 @@
 The *glinfo* is a program for displaying OpenGL capabilities information of the current system. 
 The program was influenced by both the *clinfo* and *vulkaninfo* program.
 
-The program attempts to query information about all possible enumerate that describes the system capabilities. This means enumerate that is associated with the current state of the OpenGL context will not be queried, for example *GL_ACTIVE_TEXTURE* since the return value does not say anything about systems capabilities. Whereas the enumerate *GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS* return value describes the system capability, which in this case is the number of possible number of binded textures. See the OpenGL specification for more detail for each enumerate.
-
 ## Installation
 The program can be installed with the following commands.
 
