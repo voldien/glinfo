@@ -435,12 +435,11 @@ int main(int argc, char **argv) {
 		glRenderInterface->setDebug(false);
 
 		/*	Display information.	*/
-		printf("RENDERER %s\n", glGetString(GL_RENDERER));
-		printf("VENDOR %s\n", glGetString(GL_VENDOR));
-		printf("VERSION %s\n", glGetString(GL_VERSION));
-		printf("SHADING_LANGUAGE_VERSION %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-		printf("\n");
-
+		std::cout << "RENDERER: " << glGetString(GL_RENDERER) << std::endl;
+		std::cout << "VENDOR: " << glGetString(GL_VENDOR) << std::endl;
+		std::cout << "VERSION: " << glGetString(GL_VERSION) << std::endl;
+		std::cout << "SHADING_LANGUAGE_VERSION: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+		std::cout << std::endl;
 		/*	*/
 		for (size_t i = 0; i < extensionList.size(); i++) {
 			const ExtensionEntry &extension = extensionList[i];
@@ -491,7 +490,7 @@ int main(int argc, char **argv) {
 				}
 				std::cout << std::endl;
 			} else {
-				std::cout << "Not supported extension: " << extension.name << std::endl;
+				std::cout << extension.name << " : Not supported" << std::endl << std::endl;
 			}
 		}
 

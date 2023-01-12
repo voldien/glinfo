@@ -17,19 +17,20 @@ make
 ```
 
 ## Example
-The program can be easily executed. Since it does take any argument. See the following section for an example of how the output data is formatted.
-```
+The program can be easily executed. See the following section for an example of how the output data is formatted.
+```bash
 ./glinfo
-VERSION 4.6.0 NVIDIA 525.60.11
-SHADING_LANGUAGE_VERSION 4.60 NVIDIA
+RENDERER: NVIDIA GeForce RTX 3070 Ti/PCIe/SSE2
+VENDOR: NVIDIA Corporation
+VERSION: 4.6.0 NVIDIA 525.60.11
+SHADING_LANGUAGE_VERSION: 4.60 NVIDIA
 
-Not supported extension: GL_VERSION_1_1
+GL_VERSION_1_1 : Not supported
+
 GL_VERSION_1_2
         GL_MAX_3D_TEXTURE_SIZE : 16384
         GL_MAX_ELEMENTS_INDICES : 1048576
         GL_MAX_ELEMENTS_VERTICES : 1048576
-        GL_TEXTURE_MAX_LEVEL : 1048576
-        GL_TEXTURE_MAX_LOD : 1048576
 
 GL_VERSION_1_3
         GL_MAX_CUBE_MAP_TEXTURE_SIZE : 32768
@@ -52,6 +53,18 @@ GL_VERSION_2_0
 GL_VERSION_3_0
         GL_MAX_ARRAY_TEXTURE_LAYERS : 2048
         GL_MAX_CLIP_DISTANCES : 8
+        GL_MAX_CLIP_PLANES : 8
+        GL_MAX_PROGRAM_TEXEL_OFFSET : 7
+        GL_MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS : 128
+        GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS : 4
+        GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS : 4
+        GL_MAX_VARYING_COMPONENTS : 124
+        GL_MAX_VARYING_FLOATS : 124
+        GL_MIN_PROGRAM_TEXEL_OFFSET : -8
+        GL_NUM_EXTENSIONS : 400
+
+GL_VERSION_3_1
+        GL_MAX_RECTANGLE_TEXTURE_SIZE : 32768
 ....
 ....
 ```
@@ -60,7 +73,7 @@ GL_VERSION_3_0
 ### Linux
 In order to compile the program, the following Debian packages has to be installed.
 ```
-apt-get install mesa-common-dev libglew-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
+apt-get install install libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev libsdl2-dev libfmt-dev libeigen3-dev libglew-dev libbz2-dev libzip-dev libfmt-dev binutils-dev
 ```
 
 ## License
