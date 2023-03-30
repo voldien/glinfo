@@ -7,9 +7,9 @@ void readargument(int argc, char **argv) {
 
 	const char *shoopt = "v";
 	int c;
-	static struct option longoption[] = {{"version", no_argument, NULL, 'v'}, {NULL, NULL, NULL, NULL}};
+	static struct option longoption[] = {{"version", no_argument, nullptr, 'v'}, {nullptr, 0, nullptr, 0}};
 
-	while ((c = getopt_long(argc, argv, shoopt, longoption, NULL)) != EOF) {
+	while ((c = getopt_long(argc, argv, shoopt, longoption, nullptr)) != EOF) {
 		switch (c) {
 		case 'v':
 			printf("version %s.\n", GLIF_VERSION);
