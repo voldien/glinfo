@@ -73,7 +73,7 @@ GL_VERSION_3_1
 ### Linux
 In order to compile the program, the following Debian packages has to be installed.
 ```
-apt-get install install libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev libsdl2-dev libfmt-dev libeigen3-dev libglew-dev libbz2-dev libzip-dev libfmt-dev binutils-dev
+apt-get install libyaml-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev libsdl2-dev libfmt-dev libeigen3-dev libglew-dev libbz2-dev libzip-dev libfmt-dev binutils-dev
 ```
 
 ## License
