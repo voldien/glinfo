@@ -68,12 +68,12 @@ typedef struct extension_entry_t {
 
 #define GLIF_MACRON(glenum, x)                                                                                         \
 	{                                                                                                                  \
-#glenum, { glenum, x }                                                                                         \
+		#glenum, { glenum, x }                                                                                         \
 	}
 
 #define GLIF_MACRO(glenum)                                                                                             \
 	{                                                                                                                  \
-#glenum, { glenum, 1 }                                                                                         \
+		#glenum, { glenum, 1 }                                                                                         \
 	}
 
 std::vector<ExtensionEntry> extensionList = {
@@ -424,7 +424,15 @@ std::vector<ExtensionEntry> extensionList = {
 		 GLIF_MACRO(GL_MAX_FFT_WIDTH_SGI),
 	 },
 	 {}},
-};
+	{"GL_KHR_shader_subgroup",
+	 {},
+	 {
+		 GLIF_MACRO(GL_SUBGROUP_SIZE_KHR),
+		 GLIF_MACRO(GL_SUBGROUP_SUPPORTED_STAGES_KHR),
+		 GLIF_MACRO(GL_SUBGROUP_SUPPORTED_FEATURES_KHR),
+		 GLIF_MACRO(GL_SUBGROUP_QUAD_ALL_STAGES_KHR),
+	 },
+	 {}}};
 
 int main(int argc, char **argv) {
 
