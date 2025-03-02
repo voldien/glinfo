@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 3.9 )
-PROJECT(glinfo)
+PROJECT(glinfo CXX)
 
 # Use GNUInstallDirs for Unix predefined directories
 INCLUDE(GNUInstallDirs)
@@ -37,11 +37,11 @@ ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/window/sdl 
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/renderer EXCLUDE_FROM_ALL)
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/renderer/opengl EXCLUDE_FROM_ALL)
 
-
+#
 FILE(GLOB source ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/src/argument.cpp)
 
-#
+##
 ADD_EXECUTABLE(glinfo ${source} ${glsrc})
 TARGET_LINK_LIBRARIES(glinfo fragcore fragcore-rgl)
 TARGET_INCLUDE_DIRECTORIES(glinfo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)

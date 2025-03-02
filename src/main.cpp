@@ -388,6 +388,15 @@ std::vector<ExtensionEntry> extensionList = {
 		 GLIF_MACRO(GL_MAX_SHININESS_NV),
 		 GLIF_MACRO(GL_MAX_SPOT_EXPONENT_NV),
 	 }},
+	{"GL_NV_shading_rate_image",
+	 {},
+	 {
+		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_PALETTE_SIZE_NV),
+		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV),
+		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_HEIGHT_NV),
+		 GLIF_MACRO(GL_MAX_COARSE_FRAGMENT_SAMPLES_NV),
+	 },
+	 {}},
 	{"GL_EXT_raster_multisample", {}, {GLIF_MACRO(GL_MAX_RASTER_SAMPLES_EXT)}, {}},
 	{"GL_OVR_multiview", {}, {GLIF_MACRO(GL_MAX_VIEWS_OVR)}, {}},
 	{"GL_KHR_debug",
@@ -395,7 +404,15 @@ std::vector<ExtensionEntry> extensionList = {
 	  GLIF_MACRO(GL_MAX_DEBUG_MESSAGE_LENGTH), GLIF_MACRO(GL_MAX_DEBUG_LOGGED_MESSAGES)},
 	 {},
 	 {}},
-
+	{"GL_KHR_shader_subgroup",
+	 {},
+	 {
+		 GLIF_MACRO(GL_SUBGROUP_SIZE_KHR),
+		 GLIF_MACRO(GL_SUBGROUP_SUPPORTED_STAGES_KHR),
+		 GLIF_MACRO(GL_SUBGROUP_SUPPORTED_FEATURES_KHR),
+		 GLIF_MACRO(GL_SUBGROUP_QUAD_ALL_STAGES_KHR),
+	 },
+	 {}},
 	{"GL_ARB_sync", {}, {GLIF_MACRO(GL_MAX_SERVER_WAIT_TIMEOUT)}, {}},
 	{"GL_NV_viewport_array", {}, {GLIF_MACRO(GL_MAX_VIEWPORTS_NV)}, {}},
 	{"GL_NV_viewport_array", {}, {GLIF_MACRO(GL_MAX_SAMPLES_NV)}, {}},
@@ -424,27 +441,8 @@ std::vector<ExtensionEntry> extensionList = {
 		 GLIF_MACRO(GL_MAX_FFT_WIDTH_SGI),
 	 },
 	 {}},
-	{"GL_KHR_shader_subgroup",
-	 {},
-	 {
-		 GLIF_MACRO(GL_SUBGROUP_SIZE_KHR),
-		 GLIF_MACRO(GL_SUBGROUP_SUPPORTED_STAGES_KHR),
-		 GLIF_MACRO(GL_SUBGROUP_SUPPORTED_FEATURES_KHR),
-		 GLIF_MACRO(GL_SUBGROUP_QUAD_ALL_STAGES_KHR),
-	 },
-	 {}},
-{"GL_NV_shading_rate_image",
-	 {},
-	 {
-		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_PALETTE_SIZE_NV),
-		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV),
-		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_HEIGHT_NV),
-		 GLIF_MACRO(GL_MAX_COARSE_FRAGMENT_SAMPLES_NV),
-	 },
-	 {}}
+
 };
-
-
 
 int main(int argc, char **argv) {
 
@@ -460,6 +458,7 @@ int main(int argc, char **argv) {
 		std::cout << "VERSION: " << glGetString(GL_VERSION) << std::endl;
 		std::cout << "SHADING_LANGUAGE_VERSION: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 		std::cout << std::endl;
+
 		/*	*/
 		for (size_t i = 0; i < extensionList.size(); i++) {
 			const ExtensionEntry &extension = extensionList[i];
