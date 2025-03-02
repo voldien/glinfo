@@ -432,7 +432,19 @@ std::vector<ExtensionEntry> extensionList = {
 		 GLIF_MACRO(GL_SUBGROUP_SUPPORTED_FEATURES_KHR),
 		 GLIF_MACRO(GL_SUBGROUP_QUAD_ALL_STAGES_KHR),
 	 },
-	 {}}};
+	 {}},
+{"GL_NV_shading_rate_image",
+	 {},
+	 {
+		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_PALETTE_SIZE_NV),
+		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV),
+		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_HEIGHT_NV),
+		 GLIF_MACRO(GL_MAX_COARSE_FRAGMENT_SAMPLES_NV),
+	 },
+	 {}}
+};
+
+
 
 int main(int argc, char **argv) {
 
