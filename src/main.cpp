@@ -218,6 +218,7 @@ std::vector<ExtensionEntry> extensionList = {
 	  GLIF_MACRO(GL_MAX_FRAMEBUFFER_LAYERS), GLIF_MACRO(GL_MAX_FRAMEBUFFER_SAMPLES)},
 	 {},
 	 {}},
+	{"GL_ARB_viewport_array", {GLIF_MACRO(GL_MAX_VIEWPORTS),GLIF_MACRO(GL_VIEWPORT_SUBPIXEL_BITS)}, {}, {}},
 
 	{"GL_EXT_framebuffer_multisample", {GLIF_MACRO(GL_MAX_SAMPLES_EXT)}, {}, {}},
 	{"GL_ARB_framebuffer_object",
@@ -389,13 +390,13 @@ std::vector<ExtensionEntry> extensionList = {
 		 GLIF_MACRO(GL_MAX_SPOT_EXPONENT_NV),
 	 }},
 	{"GL_NV_shading_rate_image",
-	 {},
 	 {
 		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_PALETTE_SIZE_NV),
 		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV),
 		 GLIF_MACRO(GL_SHADING_RATE_IMAGE_TEXEL_HEIGHT_NV),
 		 GLIF_MACRO(GL_MAX_COARSE_FRAGMENT_SAMPLES_NV),
 	 },
+	 {},
 	 {}},
 	{"GL_EXT_raster_multisample", {}, {GLIF_MACRO(GL_MAX_RASTER_SAMPLES_EXT)}, {}},
 	{"GL_OVR_multiview", {}, {GLIF_MACRO(GL_MAX_VIEWS_OVR)}, {}},
@@ -473,7 +474,7 @@ int main(int argc, char **argv) {
 					const std::string &attributeName = (*it).first;
 					const size_t nrParams = (*it).second.nrValues;
 					GLenum enumV = (*it).second.capability;
-					GLint Integervtmp;
+					GLint Integervtmp = 0;
 
 					/*	*/
 					std::cout << "\t" << attributeName << " : ";
@@ -496,14 +497,14 @@ int main(int argc, char **argv) {
 				for (auto it = extension.Int64.cbegin(); it != extension.Int64.cend(); it++) {
 					const std::string &attributeName = (*it).first;
 					GLenum enumV = (*it).second.capability;
-					GLint64 Integervtmp;
+					GLint64 Integervtmp = 0;
 					glGetInteger64v(enumV, &Integervtmp);
 					std::cout << "\t" << attributeName << " : " << Integervtmp << std::endl;
 				}
 				for (auto it = extension.Float.cbegin(); it != extension.Float.cend(); it++) {
 					const std::string &attributeName = (*it).first;
 					GLenum enumV = (*it).second.capability;
-					GLfloat Integervtmp;
+					GLfloat Integervtmp = 0;
 					glGetFloatv(enumV, &Integervtmp);
 					std::cout << "\t" << attributeName << " : " << Integervtmp << std::endl;
 				}
