@@ -22,8 +22,8 @@ jobs:
     - name: Configure dependencies
       run: |
         sudo apt-get install libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev \
-        libsdl2-dev libfmt-dev libeigen3-dev libglew-dev \
-        libbz2-dev libzip-dev libfmt-dev binutils-dev
+        libsdl2-dev libeigen3-dev libglew-dev \
+        libbz2-dev libzip-dev binutils-dev
 
 
     - name: Create Build Environment

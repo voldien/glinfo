@@ -520,7 +520,7 @@ int main(int argc, char **argv) {
 				  << "Number of Supported Compression Formats: " << NumCompressedTexture << std::endl
 				  << std::endl;
 
-		std::cout << "OpenGL Compressed Format GLenum Values" << std::endl;
+		std::cout << "OpenGL Compressed Format GLenum Values:" << std::endl;
 		std::vector<GLint> formats(NumCompressedTexture);
 		glGetIntegerv(GL_COMPRESSED_TEXTURE_FORMATS, formats.data());
 		for (GLint format : formats) {
@@ -535,9 +535,9 @@ int main(int argc, char **argv) {
 		};
 
 		auto check_extention_and_print = [&append_extension_if_supported](const char *compressionFamilyName,
-																		  const std::vector<const char *> familiyList) {
+																		  const std::vector<const char *> familyList) {
 			std::vector<std::string> dxt1;
-			for (const char *ext : familiyList) {
+			for (const char *ext : familyList) {
 				append_extension_if_supported(ext, dxt1);
 			}
 
@@ -623,7 +623,7 @@ int main(int argc, char **argv) {
 		GLint nrExtensions;
 		glGetIntegerv(GL_NUM_EXTENSIONS, &nrExtensions);
 
-		std::cout << std::endl << "Device Extensions: " << nrExtensions << std::endl;
+		std::cout << std::endl << "Device Extensions: " << std::dec << nrExtensions << std::endl;
 		for (GLint i = 0; i < nrExtensions; i++) {
 
 			std::cout << "\t" << glGetStringi(GL_EXTENSIONS, i) << std::endl;
