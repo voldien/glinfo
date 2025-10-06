@@ -1,4 +1,5 @@
 # glinfo
+
 [![glinfo](https://github.com/voldien/glinfo/actions/workflows/main.yml/badge.svg)](https://github.com/voldien/glinfo/actions/workflows/main.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub release](https://img.shields.io/github/release/voldien/glinfo.svg)](https://github.com/voldien/glinfo/releases)
@@ -7,6 +8,7 @@ The *glinfo* is a program for displaying OpenGL capabilities information of the 
 The program was influenced by both the *clinfo* and *vulkaninfo* program.
 
 ## Installation
+
 The program can be installed with the following commands.
 
 ```bash
@@ -16,8 +18,20 @@ cmake ..
 make
 ```
 
+## Dependencies
+
+### Linux
+
+In order to compile the program, the following Debian packages has to be installed.
+
+```bash
+apt-get install libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev libsdl2-dev libeigen3-dev libglew-dev libbz2-dev libzip-dev binutils-dev
+```
+
 ## Example
+
 The program can be easily executed. See the following section for an example of how the output data is formatted.
+
 ```bash
 ./glinfo
 RENDERER: NVIDIA GeForce RTX 3070 Ti/PCIe/SSE2
@@ -69,12 +83,16 @@ GL_VERSION_3_1
 ....
 ```
 
-## Dependencies
-### Linux
-In order to compile the program, the following Debian packages has to be installed.
-```
-apt-get install libyaml-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev libsdl2-dev libfmt-dev libeigen3-dev libglew-dev libbz2-dev libzip-dev libfmt-dev binutils-dev
-```
-
 ## License
+
 This project is licensed under the GPL+3 License - see the [LICENSE](LICENSE) file for details
+
+## Misc Notes
+
+### Force NVIDIA Usage
+
+Force the system to try to use the NVIDIA GPU. This is very useful when using a system with multiple GPUs.
+
+```bash
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia program arguments
+```

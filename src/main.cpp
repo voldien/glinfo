@@ -218,7 +218,7 @@ std::vector<ExtensionEntry> extensionList = {
 	  GLIF_MACRO(GL_MAX_FRAMEBUFFER_LAYERS), GLIF_MACRO(GL_MAX_FRAMEBUFFER_SAMPLES)},
 	 {},
 	 {}},
-	{"GL_ARB_viewport_array", {GLIF_MACRO(GL_MAX_VIEWPORTS),GLIF_MACRO(GL_VIEWPORT_SUBPIXEL_BITS)}, {}, {}},
+	{"GL_ARB_viewport_array", {GLIF_MACRO(GL_MAX_VIEWPORTS), GLIF_MACRO(GL_VIEWPORT_SUBPIXEL_BITS)}, {}, {}},
 
 	{"GL_EXT_framebuffer_multisample", {GLIF_MACRO(GL_MAX_SAMPLES_EXT)}, {}, {}},
 	{"GL_ARB_framebuffer_object",
@@ -513,6 +513,112 @@ int main(int argc, char **argv) {
 				std::cout << extension.name << " : Not supported" << std::endl << std::endl;
 			}
 		}
+
+		GLint NumCompressedTexture;
+		glGetIntegerv(GL_NUM_COMPRESSED_TEXTURE_FORMATS, &NumCompressedTexture);
+		std::cout << std::endl
+				  << "Number of Supported Compression Formats: " << NumCompressedTexture << std::endl
+				  << std::endl;
+
+		std::cout << "OpenGL Compressed Format GLenum Values" << std::endl;
+		std::vector<GLint> formats(NumCompressedTexture);
+		glGetIntegerv(GL_COMPRESSED_TEXTURE_FORMATS, formats.data());
+		for (GLint format : formats) {
+			std::cout << std::hex << format << ", ";
+		}
+		std::cout << std::endl << std::endl;
+
+		auto append_extension_if_supported = [](const char *extension, std::vector<std::string> &list) {
+			if (glewIsExtensionSupported(extension)) {
+				list.push_back(extension);
+			}
+		};
+
+		auto check_extention_and_print = [&append_extension_if_supported](const char *compressionFamilyName,
+																		  const std::vector<const char *> familiyList) {
+			std::vector<std::string> dxt1;
+			for (const char *ext : familiyList) {
+				append_extension_if_supported(ext, dxt1);
+			}
+
+			const char *tab = "\t\t\t";
+			std::cout << compressionFamilyName << ": " << (dxt1.size() > 0 ? "Yes" : "No") << std::endl;
+			for (std::string &ext : dxt1) {
+				std::cout << tab << ext << std::endl;
+			}
+			std::cout << std::endl;
+		};
+
+		const std::vector<const char *> dxt1Family = {"GL_ANGLE_texture_compression_dxt1",
+													  "GL_ANGLE_texture_compression_dxt3",
+													  "GL_ANGLE_texture_compression_dxt5",
+													  "GL_EXT_texture_compression_dxt1",
+													  "GL_EXT_texture_compression_s3tc",
+													  "GL_COMPRESSED_SRGB_S3TC_DXT1_EXT",
+													  "GL_EXT_texture_sRGB",
+													  "GL_NV_sRGB_formats",
+													  "GL_NV_texture_compression_s3tc"};
+
+		const std::vector<const char *> dxt3Family = {
+			"GL_ANGLE_texture_compression_dxt1",
+			"GL_ANGLE_texture_compression_dxt3",
+			"GL_ANGLE_texture_compression_dxt5",
+			"GL_EXT_texture_compression_s3tc",
+			"GL_EXT_texture_compression_s3tc_srgb",
+			"GL_EXT_texture_sRGB",
+			"GL_NV_sRGB_formats",
+			"GL_NV_texture_compression_s3tc",
+
+		};
+
+		const std::vector<const char *> dxt5Family = {"GL_ANGLE_texture_compression_dxt1",
+													  "GL_ANGLE_texture_compression_dxt3",
+													  "GL_ANGLE_texture_compression_dxt5",
+													  "GL_EXT_texture_compression_s3tc",
+													  "GL_EXT_texture_compression_s3tc_srgb",
+													  "GL_EXT_texture_sRGB",
+													  "GL_NV_sRGB_formats",
+													  "GL_NV_texture_compression_s3tc",
+													  "GL_S3_s3tc"};
+
+		const std::vector<const char *> bc4Family = {"GL_ARB_texture_compression_rgtc",
+													 "GL_EXT_texture_compression_rgtc"};
+
+		const std::vector<const char *> bc5Family = {
+			"GL_ATI_texture_compression_3dc", "GL_ARB_texture_compression_rgtc", "GL_EXT_texture_compression_rgtc"};
+
+		const std::vector<const char *> bptcFamily = {"GL_ARB_texture_compression_bptc",
+													  "GL_EXT_texture_compression_bptc"};
+
+		const std::vector<const char *> etc1Family = {
+			"GL_EXT_compressed_ETC1_RGB8_sub_texture",
+			"GL_ETC1_SRGB8_NV",
+			"GL_OES_compressed_ETC1_RGB8_texture",
+		};
+		const std::vector<const char *> etc2Family = {"GL_ARB_ES3_compatibility"};
+		const std::vector<const char *> astcFamily = {
+			"GL_EXT_texture_compression_astc_decode_mode", "GL_EXT_texture_compression_astc_decode_mode_rgb9e5",
+			"GL_KHR_texture_compression_astc_hdr",		   "GL_KHR_texture_compression_astc_ldr",
+			"GL_KHR_texture_compression_astc_sliced_3d",   "GL_OES_texture_compression_astc"};
+
+		const std::vector<const char *> pvrtFamily = {"GL_EXT_pvrtc_sRGB", "GL_IMG_texture_compression_pvrtc2"};
+		const std::vector<const char *> fxt1Family = {"GL_3DFX_texture_compression_FXT1"};
+
+		check_extention_and_print("DXT1 (BC1)", dxt1Family);
+		check_extention_and_print("DXT3 (BC2)", dxt3Family);
+		check_extention_and_print("DXT5 (BC3)", dxt5Family);
+		check_extention_and_print("BC4", bc4Family);
+		check_extention_and_print("BC5", bc5Family);
+		check_extention_and_print("BPTC (BC7)", bptcFamily);
+		check_extention_and_print("ETC1", etc1Family);
+		check_extention_and_print("ETC2", etc2Family);
+		check_extention_and_print("ASTC", astcFamily);
+		check_extention_and_print("PVRTC", pvrtFamily);
+		check_extention_and_print("FXT1", fxt1Family);
+
+		// LATC
+		//  VTC
+		//  GL_EXT_texture_storage_compression
 
 		GLint nrExtensions;
 		glGetIntegerv(GL_NUM_EXTENSIONS, &nrExtensions);
