@@ -64,5 +64,6 @@ CTestTestfile.cmake
 
 # temp files.
 *~
-build/
+build*/
 .cache/
+.AppImage

@@ -10,21 +10,17 @@ SET(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib CACHE INTERNAL "" FORCE)
 SET(MAJOR 1)
 SET(MINOR 0)
 SET(PATCH 0)
-SET(STATE a)
+SET(STATE rc)
 SET(VERSION ${MAJOR}.${MINOR}${STATE}${PATCH} )
 ADD_DEFINITIONS(-DGLIF_VERSION="${VERSION}")
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release")
 	MESSAGE(STATUS "Compile for release.")
-	ADD_DEFINITIONS(-DNDEBUG=1)
-	ADD_DEFINITIONS(-O2)
-	SET(CMAKE_RELEASE TRUE)
+	ADD_DEFINITIONS(-O3)
 	SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
 ELSE()
 	MESSAGE(STATUS "Compile for debug.")
-	ADD_DEFINITIONS(-D_DEBUG)
 	ADD_DEFINITIONS(-g3 -O0)
-	SET(CMAKE_DEBUG TRUE)
 ENDIF()
 
 # ###########################################
@@ -43,7 +39,12 @@ FILE(GLOB source ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 
 ##
 ADD_EXECUTABLE(glinfo ${source} ${glsrc})
-TARGET_LINK_LIBRARIES(glinfo fragcore fragcore-rgl)
+TARGET_LINK_LIBRARIES(glinfo PUBLIC fragcore fragcore-rgl)
 TARGET_INCLUDE_DIRECTORIES(glinfo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
+# Install Targets
 INSTALL(TARGETS glinfo DESTINATION bin)
+INSTALL(TARGETS fragcore fragcore-rgl fragcore-window-sdl fmt taskSch cxxexcept infoware
+																	LIBRARY
+																	COMPONENT Runtime
+																	DESTINATION lib)

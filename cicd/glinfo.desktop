@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=glinfo
+Exec=glinfo
+Icon=glinfo-icon
+Categories=Utility
+Terminal=true
+GenericName=Debug/Analysis Tool
+Keywords=opengl;

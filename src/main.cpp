@@ -536,14 +536,14 @@ int main(int argc, char **argv) {
 
 		auto check_extention_and_print = [&append_extension_if_supported](const char *compressionFamilyName,
 																		  const std::vector<const char *> familyList) {
-			std::vector<std::string> dxt1;
+			std::vector<std::string> compression_supported_list;
 			for (const char *ext : familyList) {
-				append_extension_if_supported(ext, dxt1);
+				append_extension_if_supported(ext, compression_supported_list);
 			}
 
 			const char *tab = "\t\t\t";
-			std::cout << compressionFamilyName << ": " << (dxt1.size() > 0 ? "Yes" : "No") << std::endl;
-			for (std::string &ext : dxt1) {
+			std::cout << compressionFamilyName << ": " << (compression_supported_list.size() > 0 ? "Yes" : "No") << std::endl;
+			for (std::string &ext : compression_supported_list) {
 				std::cout << tab << ext << std::endl;
 			}
 			std::cout << std::endl;
