@@ -27,6 +27,7 @@ ENDIF()
 # Backend libraries
 # ###########################################
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore EXCLUDE_FROM_ALL)
+# OpenGL SubSystem
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/image EXCLUDE_FROM_ALL)
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/window EXCLUDE_FROM_ALL)
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/window/sdl EXCLUDE_FROM_ALL)

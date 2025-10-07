@@ -1,6 +1,6 @@
 /*
  *	OpenGL Capability information.
- *	Copyright (C) 2016  Valdemar Lindberg
+ *	Copyright (C) 2016 - Valdemar Lindberg
  *
  *	This program is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -450,6 +450,7 @@ int main(int argc, char **argv) {
 	try {
 		readargument(argc, argv);
 
+		/*	Create OpenGL Context.	*/
 		Ref<GLRendererInterface> glRenderInterface = Ref<GLRendererInterface>(new GLRendererInterface(nullptr));
 		glRenderInterface->setDebug(false);
 
@@ -473,7 +474,7 @@ int main(int argc, char **argv) {
 				for (auto it = extension.Int32.cbegin(); it != extension.Int32.cend(); it++) {
 					const std::string &attributeName = (*it).first;
 					const size_t nrParams = (*it).second.nrValues;
-					GLenum enumV = (*it).second.capability;
+					const GLenum enumV = (*it).second.capability;
 					GLint Integervtmp = 0;
 
 					/*	*/
@@ -496,14 +497,14 @@ int main(int argc, char **argv) {
 
 				for (auto it = extension.Int64.cbegin(); it != extension.Int64.cend(); it++) {
 					const std::string &attributeName = (*it).first;
-					GLenum enumV = (*it).second.capability;
+					const GLenum enumV = (*it).second.capability;
 					GLint64 Integervtmp = 0;
 					glGetInteger64v(enumV, &Integervtmp);
 					std::cout << "\t" << attributeName << " : " << Integervtmp << std::endl;
 				}
 				for (auto it = extension.Float.cbegin(); it != extension.Float.cend(); it++) {
 					const std::string &attributeName = (*it).first;
-					GLenum enumV = (*it).second.capability;
+					const GLenum enumV = (*it).second.capability;
 					GLfloat Integervtmp = 0;
 					glGetFloatv(enumV, &Integervtmp);
 					std::cout << "\t" << attributeName << " : " << Integervtmp << std::endl;

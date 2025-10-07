@@ -19,19 +19,21 @@
 # Uncomment to debug this shell script
 #
 
-FILEPATH_DIR=`dirname $(readlink -f $0)`
+SCRIPT_ROOTDIR=`dirname $(readlink -f $0)`
 
+#
 BUILD_DIRECTORY=build_app
 BUILD_INSTALL_DIR=AppDir
 
-ICON_INTERNAL_FILENAME=glinfo-icon
+#
 ICON_BASE_FILENAME=glinfo-icon.png
-ICON_FILEPATH=$FILEPATH_DIR/$ICON_BASE_FILENAME
+ICON_FILEPATH=$SCRIPT_ROOTDIR/$ICON_BASE_FILENAME
+DESKTOP_BASE_FILENAME=glinfo.desktop
+DESKTOP_FILEPATH=$SCRIPT_ROOTDIR/$DESKTOP_BASE_FILENAME
 
-DESKTOP_FILEPATH=$FILEPATH_DIR/glinfo.desktop
+ICON_INTERNAL_FILENAME=glinfo-icon
+
 INSTALL_PATH_PREFIX="$BUILD_INSTALL_DIR/usr"
-
-#-DCMAKE_INSTALL_PREFIX=$INSTALL_PATH_PREFIX
 BUILD_COMMAND="-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE -DCMAKE_BUILD_TYPE=Release -DBUILD_WITH_INSTALL=ON"
 
 mkdir -p $BUILD_DIRECTORY && cd $BUILD_DIRECTORY
@@ -44,7 +46,7 @@ wget -nc https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20
 chmod +x linuxdeploy-x86_64.AppImage
 
 # Copy and transfer	the icon file
-cp $ICON_FILEPATH $BUILD_INSTALL_DIR/glinfo.png
+cp $ICON_FILEPATH $BUILD_INSTALL_DIR/$ICON_BASE_FILENAME
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pwd)/$BUILD_INSTALL_DIR/lib/"
 # Export variable, since the build tool is still in alpha and has its limitations.
