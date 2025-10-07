@@ -35,13 +35,13 @@ ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/renderer EX
 ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/extern/fragcore/modules/renderer/opengl EXCLUDE_FROM_ALL)
 
 #
-FILE(GLOB source ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/src/argument.cpp)
+FILE(GLOB source ${CMAKE_CURRENT_SOURCE_DIR}/glinfo/main.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/glinfo/argument.cpp)
 
 ##
 ADD_EXECUTABLE(glinfo ${source} ${glsrc})
 TARGET_LINK_LIBRARIES(glinfo PUBLIC fragcore fragcore-rgl)
-TARGET_INCLUDE_DIRECTORIES(glinfo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+TARGET_INCLUDE_DIRECTORIES(glinfo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/glinfo)
 
 # Install Targets
 INSTALL(TARGETS glinfo DESTINATION bin)
