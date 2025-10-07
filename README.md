@@ -1,6 +1,6 @@
 # glinfo
 
-[![glinfo](https://github.com/voldien/glinfo/actions/workflows/main.yml/badge.svg)](https://github.com/voldien/glinfo/actions/workflows/main.yml)
+[![glinfo](https://github.com/voldien/glinfo/actions/workflows/linux.yml/badge.svg)](https://github.com/voldien/glinfo/actions/workflows/linux.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub release](https://img.shields.io/github/release/voldien/glinfo.svg)](https://github.com/voldien/glinfo/releases)
 
