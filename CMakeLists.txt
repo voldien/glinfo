@@ -45,7 +45,7 @@ TARGET_INCLUDE_DIRECTORIES(glinfo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/glinfo)
 
 # Install Targets
 INSTALL(TARGETS glinfo DESTINATION bin)
-INSTALL(TARGETS fragcore fragcore-rgl fragcore-window-sdl fmt taskSch cxxexcept infoware
+INSTALL(TARGETS fragcore fragcore-rgl fragcore-window-sdl fmt taskSch cxxexcept infoware glew
 																	LIBRARY
 																	COMPONENT Runtime
 																	DESTINATION lib)
